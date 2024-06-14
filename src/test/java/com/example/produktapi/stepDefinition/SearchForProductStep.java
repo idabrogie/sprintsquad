@@ -27,6 +27,8 @@ public class SearchForProductStep {
         new Actions(seleniumConfig.getDriver())
                 .sendKeys(searchTxtField, productName)
                 .perform();
+
+
     }
 
     @Then("User can see the search product and expect {int} products")
@@ -34,20 +36,25 @@ public class SearchForProductStep {
         WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(20));
 
         // Wait for the products container to be visible
-        WebElement divElementsWithClass = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("my-5")));
+        WebElement mainElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("my-5")));
 
-        // Find all product elements within the container
-        List<WebElement> productElements = divElementsWithClass.findElements(By.cssSelector("div.col"));
+        // Find all 'col' div elements within the main element
+        List<WebElement> colDivs = mainElement.findElements(By.xpath(".//div[contains(@class, 'col')]"));
 
-        // Log the number of products found
-        System.out.println("Found " + productElements.size() + " products.");
+        // Initialize the count for <div class="card h-100 p-3"> elements
+        int totalCount = 0;
 
-        // Log the inner HTML content for debugging
-        System.out.println("Inner HTML of main element: " + divElementsWithClass.getAttribute("innerHTML"));
+        // Iterate through each 'col' div
+        for (WebElement colDiv : colDivs) {
+            // Find all 'card' divs within this 'col' div
+            List<WebElement> cardDivs = colDiv.findElements(By.xpath(".//div[contains(@class, 'card') and contains(@class, 'h-100') and contains(@class, 'p-3')]"));
+            // Increment the total count by the number of found 'card' divs
+            totalCount += cardDivs.size();
+        }
 
-        // Assert that the number of products matches the expected number
-        Assertions.assertEquals(numberOfProduct, productElements.size(),
-                "Expected " + numberOfProduct + " products, but found " + productElements.size());
+        // Print the total count
+        System.out.println("Total number of <div class=\"card h-100 p-3\"> elements in <div class=\"col\">: " + totalCount);
+        Assertions.assertEquals(numberOfProduct, totalCount);
     }
 
     @Then("Result should be an empty main")
@@ -57,7 +64,7 @@ public class SearchForProductStep {
         // Get the inner HTML content of the main element
         String innerHTML = mainElement.getAttribute("innerHTML");
         // Assert that the inner HTML content is empty
-        Assertions.assertTrue(innerHTML.trim().isEmpty(), "The inner HTML content is not empty");
+        Assertions.assertTrue(innerHTML.trim().isEmpty(), "The inner HTML content is empty");
     }
 
 
