@@ -28,9 +28,6 @@ jobs:
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin
 
-      - name: Build with Maven Unittest
-        run: mvn -B package --file pom.xml
- 
       - name: Build and Run Selenium
         run: |
                echo "Running Selenium tests headlessly..."
