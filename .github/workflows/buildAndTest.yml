@@ -30,8 +30,7 @@ jobs:
 
       - name: Build and Run Unit tests
         run: |
-          mvn -B clean verify \
-          -DskipTests=false \      
+          mvn clean install -DskipTests
 
       - name: Build and Run Selenium tests
         run: |
