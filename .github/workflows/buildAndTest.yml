@@ -36,4 +36,7 @@ jobs:
       - name: Build and Run Selenium tests
         run: |
           echo "Running Selenium tests headlessly..."
+          export RUN_HEADLESS=true
+          -Dcucumber.features=src/test/java/com/example/produktapi/features \
+          -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
           echo "Selenium tests completed."
