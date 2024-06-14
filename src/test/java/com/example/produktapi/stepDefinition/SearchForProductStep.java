@@ -3,6 +3,7 @@ package com.example.produktapi.stepDefinition;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 
+
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -42,19 +43,20 @@ public class SearchForProductStep {
         List<WebElement> colDivs = mainElement.findElements(By.xpath(".//div[contains(@class, 'col')]"));
 
         // Initialize the count for <div class="card h-100 p-3"> elements
-        int totalCount = 0;
+        //int totalCount = 0;
 
         // Iterate through each 'col' div
-        for (WebElement colDiv : colDivs) {
-            // Find all 'card' divs within this 'col' div
-            List<WebElement> cardDivs = colDiv.findElements(By.xpath(".//div[contains(@class, 'card') and contains(@class, 'h-100') and contains(@class, 'p-3')]"));
-            // Increment the total count by the number of found 'card' divs
-            totalCount += cardDivs.size();
-        }
-
+//        for (WebElement colDiv : colDivs) {
+//            // Find all 'card' divs within this 'col' div
+//            List<WebElement> cardDivs = colDiv.findElements(By.xpath(".//div[contains(@class, 'card') and contains(@class, 'h-100') and contains(@class, 'p-3')]"));
+//            // Increment the total count by the number of found 'card' divs
+//            totalCount += cardDivs.size();
+//        }
+        int productSize = colDivs.size();
+        Assertions.assertEquals(numberOfProduct, productSize);
         // Print the total count
-        System.out.println("Total number of <div class=\"card h-100 p-3\"> elements in <div class=\"col\">: " + totalCount);
-        Assertions.assertEquals(numberOfProduct, totalCount);
+       // System.out.println("Total number of <div class=\"card h-100 p-3\"> elements in <div class=\"col\">: " + totalCount);
+
     }
 
     @Then("Result should be an empty main")
