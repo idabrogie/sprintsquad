@@ -28,7 +28,12 @@ jobs:
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin
 
-      - name: Build and Run Selenium
+      - name: Build and Run Unit tests
         run: |
-               echo "Running Selenium tests headlessly..."
-               echo "Selenium tests completed."
+          mvn -B clean verify \
+          -DskipTests=false \      
+
+      - name: Build and Run Selenium tests
+        run: |
+          echo "Running Selenium tests headlessly..."
+          echo "Selenium tests completed."
