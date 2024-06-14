@@ -37,7 +37,6 @@ public class SeleniumConfig {
     @Given("user clicks on Menu item shop")
     public void user_clicks_on_menu_item_shop() {
         getDriver().get("https://webshop-agil-testautomatiserare.netlify.app/products#");
-
     }
     @When("User clicks on Meny item {string}")
     public void userClicksOnMenyItem(String menyItem) {
@@ -46,10 +45,8 @@ public class SeleniumConfig {
 
     @And("User has clicked on checkoutButton")
     public void userHasClickedOnCheckoutButton() {
-        System.out.println("Nu kör vi den här metoden.");
         driver.navigate().refresh();
         WebElement button = driver.findElement(By.xpath("//a[@href='/checkout']"));
-        System.out.println(button);
         button.click();
     }
 
@@ -84,7 +81,7 @@ public class SeleniumConfig {
         if (getDriver() != null) {
             System.out.println("Quitting the driver...");
             getDriver().quit();
-            driver = null; // Reset the driver to ensure it can be re-initialized if needed
+            driver = null; // Reset the driver
         }
     }
 }
