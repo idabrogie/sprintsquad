@@ -27,8 +27,11 @@ jobs:
           cd chromedriver-linux64
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin
+
+      - name: Build with Maven Unittest
+        run: mvn -B package --file pom.xml
  
-      - name: Build and Run tests
+      - name: Build and Run Selenium
         run: |
                echo "Running Selenium tests headlessly..."
                export RUN_HEADLESS=true
