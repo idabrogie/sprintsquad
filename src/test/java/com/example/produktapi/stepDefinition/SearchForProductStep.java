@@ -28,7 +28,11 @@ public class SearchForProductStep {
         new Actions(seleniumConfig.getDriver())
                 .sendKeys(searchTxtField, productName)
                 .perform();
+        // For input fields, get the value attribute
+        String inputValue = searchTxtField.getAttribute("value");
 
+
+        System.out.println("Value inside the search input field: " + inputValue);
 
     }
 
