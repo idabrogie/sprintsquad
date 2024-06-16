@@ -57,6 +57,8 @@ public class SearchForProductStep {
             // Perform additional actions if needed
         }
 
+        Assertions.assertEquals(numberOfProduct, matchingElements.size(),"Antalet stämmer");
+
 
     }
 
