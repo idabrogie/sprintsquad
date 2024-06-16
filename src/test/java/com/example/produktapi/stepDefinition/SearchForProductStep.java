@@ -47,9 +47,14 @@ public class SearchForProductStep {
         // Find all 'div' elements with class 'col' within the main element
         List<WebElement> colDivs = mainElement.findElements(By.cssSelector("div.col"));
 
-        // Filter out only visible 'col' div elements
+
+        // Debug: Print the number of found 'col' div elements
+        System.out.println("Total number of <div> elements with class 'col': " + colDivs.size());
+
+        // Filter out only visible 'col' div elements using JavaScript
+        JavascriptExecutor js = (JavascriptExecutor) seleniumConfig.getDriver();
         List<WebElement> visibleColDivs = colDivs.stream()
-                .filter(WebElement::isDisplayed)
+                .filter(div -> (Boolean) js.executeScript("return arguments[0].offsetParent !== null;", div))
                 .collect(Collectors.toList());
 
         // Count the number of visible 'col' div elements
@@ -57,6 +62,7 @@ public class SearchForProductStep {
 
         // Print the number of visible 'col' div elements
         System.out.println("Total number of visible <div> elements with class 'col' within 'my-5' class: " + numberOfVisibleColDivs);
+
 
 
     }
