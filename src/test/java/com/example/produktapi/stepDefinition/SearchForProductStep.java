@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class SearchForProductStep {
@@ -39,15 +41,24 @@ public class SearchForProductStep {
     public void userCanSeeTheSearchProductAndExpectProducts(int numberOfProduct) {
         WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(20));
 
-        // Wait for the products container to be visible
+        // Wait for the main element with class 'my-5' to be visible
         WebElement mainElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("my-5")));
 
-        // Use JavaScript to get the child element count
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) seleniumConfig.getDriver();
-        long numberOfChilds = (long) jsExecutor.executeScript("return arguments[0].childElementCount;", mainElement);
+        // Find all 'div' elements with class 'col' within the main element
+        List<WebElement> colDivs = mainElement.findElements(By.cssSelector("div.col"));
 
-        // Print the number of child elements
-        System.out.println("Number of child elements: " + numberOfChilds);
+        // Filter out only visible 'col' div elements
+        List<WebElement> visibleColDivs = colDivs.stream()
+                .filter(WebElement::isDisplayed)
+                .collect(Collectors.toList());
+
+        // Count the number of visible 'col' div elements
+        int numberOfVisibleColDivs = visibleColDivs.size();
+
+        // Print the number of visible 'col' div elements
+        System.out.println("Total number of visible <div> elements with class 'col' within 'my-5' class: " + numberOfVisibleColDivs);
+
+
     }
 
     @Then("Result should be an empty main")
