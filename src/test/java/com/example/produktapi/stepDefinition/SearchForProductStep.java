@@ -42,10 +42,12 @@ public class SearchForProductStep {
         // Wait for the products container to be visible
         WebElement mainElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("my-5")));
 
-        int numberOfChilds = Integer.parseInt(mainElement.getAttribute("childElementCount"));
+        // Use JavaScript to get the child element count
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) seleniumConfig.getDriver();
+        long numberOfChilds = (long) jsExecutor.executeScript("return arguments[0].childElementCount;", mainElement);
 
-        System.out.println(numberOfChilds);
-
+        // Print the number of child elements
+        System.out.println("Number of child elements: " + numberOfChilds);
     }
 
     @Then("Result should be an empty main")
