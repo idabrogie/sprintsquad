@@ -44,19 +44,18 @@ public class SearchForProductStep {
         // Wait for the main element with class 'my-5' to be visible
         WebElement mainElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("my-5")));
 
-        // Find all 'div' elements with class 'col' within the main element
-        List<WebElement> colDivs = mainElement.findElements(By.cssSelector("div.col"));
-        // Count visible 'col' div elements using JavaScript Executor
-        int visibleColDivCount = 0;
-        JavascriptExecutor js = (JavascriptExecutor) seleniumConfig.getDriver();
-        for (WebElement colDiv : colDivs) {
-            boolean isVisible = (boolean) js.executeScript("return window.getComputedStyle(arguments[0]).getPropertyValue('display') !== 'none' && arguments[0].offsetWidth > 0 && arguments[0].offsetHeight > 0;", colDiv);
-            if (isVisible) {
-                visibleColDivCount++;
-            }
+
+        // Use XPath to find <h3> elements containing specific text "WD"
+        List<WebElement> matchingElements = seleniumConfig.getDriver().findElements(By.xpath("//h3[contains(@class, 'card-title fs-4') and contains(text(), 'WD')]"));
+
+        // Print the number of matching elements found
+        System.out.println("Number of <h3> elements with class 'card-title fs-4' containing 'WD': " + matchingElements.size());
+
+        // Optionally, iterate over matching elements and do further actions
+        for (WebElement element : matchingElements) {
+            System.out.println("Text content: " + element.getText());
+            // Perform additional actions if needed
         }
-        // Print the count of visible 'col' div elements
-        System.out.println("Total number of visible <div> elements with class 'col' within 'my-5' class: " + visibleColDivCount);
 
 
     }
