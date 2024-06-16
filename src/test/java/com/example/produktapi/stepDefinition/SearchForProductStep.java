@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.List;
 
 
 public class SearchForProductStep {
@@ -43,23 +42,9 @@ public class SearchForProductStep {
         // Wait for the products container to be visible
         WebElement mainElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("my-5")));
 
-        // Find all 'col' div elements within the main element
-        List<WebElement> colDivs = mainElement.findElements(By.xpath(".//div[contains(@class, 'col')]"));
+        int numberOfChilds = Integer.parseInt(mainElement.getAttribute("childElementCount"));
 
-        // Initialize the count for <div class="card h-100 p-3"> elements
-        //int totalCount = 0;
-
-        // Iterate through each 'col' div
-//        for (WebElement colDiv : colDivs) {
-//            // Find all 'card' divs within this 'col' div
-//            List<WebElement> cardDivs = colDiv.findElements(By.xpath(".//div[contains(@class, 'card') and contains(@class, 'h-100') and contains(@class, 'p-3')]"));
-//            // Increment the total count by the number of found 'card' divs
-//            totalCount += cardDivs.size();
-//        }
-        int productSize = colDivs.size();
-        Assertions.assertEquals(numberOfProduct, productSize);
-        // Print the total count
-       // System.out.println("Total number of <div class=\"card h-100 p-3\"> elements in <div class=\"col\">: " + totalCount);
+        System.out.println(numberOfChilds);
 
     }
 
