@@ -40,11 +40,8 @@ public class SearchForProductStep {
     @Then("User can see the search product and expect {int} products")
     public void userCanSeeTheSearchProductAndExpectProducts(int numberOfProduct) throws InterruptedException {
        // WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(20));
-        Thread.sleep(20000);
-        // Wait for the main element with class 'my-5' to be visible
-       // List<WebElement> mainElement = wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//main/div"),2));
+        //Thread.sleep(20000);
 
-        // Use XPath to find <h3> elements containing specific text "WD"
         List<WebElement> matchingElements = seleniumConfig.getDriver().findElements(By.xpath("//main/div"));
         // Print the number of matching elements found
         System.out.println("Number of div elements in main: " + matchingElements.size());
