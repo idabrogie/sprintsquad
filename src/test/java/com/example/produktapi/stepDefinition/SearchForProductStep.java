@@ -45,16 +45,15 @@ public class SearchForProductStep {
         WebElement mainElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("my-5")));
 
         // Use XPath to find <h3> elements containing specific text "WD"
-       // List<WebElement> matchingElements = seleniumConfig.getDriver().findElements(By.xpath("//h3[contains(@class, 'card-title fs-4') and contains(text(), 'WD')]"));
-        List<WebElement> matchingElements = seleniumConfig.getDriver().findElements(By.xpath("//h3[contains(@class, 'card-title fs-4')]"));
+        List<WebElement> matchingElements = seleniumConfig.getDriver().findElements(By.xpath("//h3[contains(@class, 'card-title fs-4') and contains(text(), 'WD')]"));
         // Print the number of matching elements found
         System.out.println("Number of <h3> elements with class 'card-title fs-4' containing 'WD': " + matchingElements.size());
 
-        // itterate over list
+        // iterate over list
         for (WebElement element : matchingElements) {
             System.out.println("Text content: " + element.getText());
         }
-        Assertions.assertEquals(numberOfProduct, matchingElements.size(),"Antalet stämmer");
+        Assertions.assertEquals(numberOfProduct, matchingElements.size(), "Antalet stämmer");
     }
 
     @Then("Result should be an empty main")
