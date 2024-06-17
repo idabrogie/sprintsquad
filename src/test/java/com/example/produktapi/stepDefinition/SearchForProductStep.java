@@ -20,7 +20,10 @@ public class SearchForProductStep {
 
     @And("User search for product {string}")
     public void userSearchForProduct(String productName) {
-        WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//main/div"),20));
+        List<WebElement> expectedList = seleniumConfig.getDriver().findElements(By.xpath("//main/div"));
+        System.out.println("Number of div before search " + expectedList.size());
         WebElement searchTxtField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("search")));
 
         searchTxtField.clear();
