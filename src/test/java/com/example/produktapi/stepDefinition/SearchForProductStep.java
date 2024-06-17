@@ -14,6 +14,7 @@ import java.time.Duration;
 import java.util.List;
 
 
+
 public class SearchForProductStep {
     SeleniumConfig seleniumConfig = new SeleniumConfig();
 
@@ -38,8 +39,13 @@ public class SearchForProductStep {
 
     @Then("User can see the search product and expect {int} products")
     public void userCanSeeTheSearchProductAndExpectProducts(int numberOfProduct) {
+        WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(20));
 
-        List<WebElement> matchingElements = seleniumConfig.getDriver().findElements(By.xpath("//h3[contains(@class, 'card-title fs-4') and contains(text(), 'WD')]"));
+        // Wait for the main element with class 'my-5' to be visible
+        WebElement mainElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("my-5")));
+
+        // Use XPath to find <h3> elements containing specific text "WD"
+        List<WebElement> matchingElements = mainElement.findElements(By.xpath("//h3[contains(@class, 'card-title fs-4') and contains(text(), 'WD')]"));
         // Print the number of matching elements found
         System.out.println("Number of <h3> elements with class 'card-title fs-4' containing 'WD': " + matchingElements.size());
 
@@ -59,4 +65,6 @@ public class SearchForProductStep {
         // Assert that the inner HTML content is empty
         Assertions.assertTrue(innerHTML.trim().isEmpty(), "The inner HTML content is empty");
     }
+
+
 }
