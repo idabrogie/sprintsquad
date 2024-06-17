@@ -54,7 +54,6 @@ public class SearchForProductStep {
             System.out.println("Text content: " + element.getText());
         }
         Assertions.assertEquals(numberOfProduct, matchingElements.size());
-
     }
 
     @Then("Result should be an empty main")
