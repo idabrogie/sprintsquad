@@ -14,14 +14,13 @@ import java.time.Duration;
 import java.util.List;
 
 
-
 public class SearchForProductStep {
     SeleniumConfig seleniumConfig = new SeleniumConfig();
 
     @And("User search for product {string}")
     public void userSearchForProduct(String productName) {
         WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//main/div"),20));
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//main/div"), 20));
         List<WebElement> expectedList = seleniumConfig.getDriver().findElements(By.xpath("//main/div"));
         System.out.println("Number of div before search " + expectedList.size());
         WebElement searchTxtField = seleniumConfig.getDriver().findElement(By.id("search"));
@@ -38,18 +37,11 @@ public class SearchForProductStep {
     }
 
     @Then("User can see the search product and expect {int} products")
-    public void userCanSeeTheSearchProductAndExpectProducts(int numberOfProduct) throws InterruptedException {
-       // WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(20));
-        //Thread.sleep(20000);
-
+    public void userCanSeeTheSearchProductAndExpectProducts(int numberOfProduct) {
         List<WebElement> matchingElements = seleniumConfig.getDriver().findElements(By.xpath("//main/div"));
         // Print the number of matching elements found
-        System.out.println("Number of div elements in main: " + matchingElements.size());
+        System.out.println("Number of matching products: " + matchingElements.size());
 
-        // iterate over list
-        for (WebElement element : matchingElements) {
-            System.out.println("Text content: " + element.getText());
-        }
         Assertions.assertEquals(numberOfProduct, matchingElements.size());
     }
 
