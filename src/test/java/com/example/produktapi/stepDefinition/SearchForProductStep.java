@@ -38,22 +38,23 @@ public class SearchForProductStep {
     }
 
     @Then("User can see the search product and expect {int} products")
-    public void userCanSeeTheSearchProductAndExpectProducts(int numberOfProduct) {
-        WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(20));
-
+    public void userCanSeeTheSearchProductAndExpectProducts(int numberOfProduct) throws InterruptedException {
+       // WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(20));
+        Thread.sleep(20000);
         // Wait for the main element with class 'my-5' to be visible
-        List<WebElement> mainElement = wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//main/div"),2));
+       // List<WebElement> mainElement = wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//main/div"),2));
 
         // Use XPath to find <h3> elements containing specific text "WD"
-      //  List<WebElement> matchingElements = mainElement.findElements(By.xpath("//h3[contains(@class, 'card-title fs-4')]"));
+        List<WebElement> matchingElements = seleniumConfig.getDriver().findElements(By.xpath("//main/div"));
         // Print the number of matching elements found
-        System.out.println("Number of div elements in main: " + mainElement.size());
+        System.out.println("Number of div elements in main: " + matchingElements.size());
 
         // iterate over list
-        for (WebElement element : mainElement) {
+        for (WebElement element : matchingElements) {
             System.out.println("Text content: " + element.getText());
         }
-        Assertions.assertEquals(numberOfProduct, mainElement.size());
+        Assertions.assertEquals(numberOfProduct, matchingElements.size());
+
     }
 
     @Then("Result should be an empty main")
