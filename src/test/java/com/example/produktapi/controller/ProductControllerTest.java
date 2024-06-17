@@ -87,7 +87,7 @@ class ProductControllerTest {
         Assertions.assertNotEquals(1, mockProduct.getId());
     }
     @Test
-    void testGeExpectedJson() {
+    void testGetExpectedJson() {
         Integer productId = 2;
         Product mockProduct = createMockProduct(productId);
 
