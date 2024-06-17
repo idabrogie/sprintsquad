@@ -24,8 +24,7 @@ public class SearchForProductStep {
         wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//main/div"),20));
         List<WebElement> expectedList = seleniumConfig.getDriver().findElements(By.xpath("//main/div"));
         System.out.println("Number of div before search " + expectedList.size());
-        WebElement searchTxtField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("search")));
-
+        WebElement searchTxtField = seleniumConfig.getDriver().findElement(By.id("search"));
         searchTxtField.clear();
         searchTxtField.click();
 
@@ -35,9 +34,7 @@ public class SearchForProductStep {
         // For input fields, get the value attribute
         String inputValue = searchTxtField.getAttribute("value");
 
-
         System.out.println("Value inside the search input field: " + inputValue);
-
     }
 
     @Then("User can see the search product and expect {int} products")
