@@ -1,6 +1,5 @@
 package com.example.produktapi.stepDefinition;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -29,7 +28,7 @@ public class CheckoutFormSteps {
     @When("User fillout the form with invalid emailadress")
     public void userFilloutTheFormWithInvalidEmailadress() {
         // Map<String, String> validCustomerData = validCustomer();
-        for (Map.Entry<String, String> set : invalidCustomer().entrySet()){
+        for (Map.Entry<String, String> set : invalidCustomer().entrySet()) {
             WebElement formElement = seleniumConfig.getDriver().findElement(By.id(set.getKey()));
             new Actions(seleniumConfig.getDriver())
                     .sendKeys(formElement, set.getValue())
@@ -38,7 +37,6 @@ public class CheckoutFormSteps {
 
         }
     }
-
 
     @When("user clicks the continue to checkout")
     public void userClicksTheContinueToCheckout() {
@@ -50,8 +48,9 @@ public class CheckoutFormSteps {
 
         // Click using JavaScript executor
         ((JavascriptExecutor) seleniumConfig.getDriver()).executeScript("arguments[0].click();", checkoutButton);
-       // checkoutButton.click();
+        // checkoutButton.click();
     }
+
     @Then("the user gets validation errors and cant continue")
     public void theUserCannotContinueToCheckout() {
         WebElement formElement = seleniumConfig.getDriver().findElement(By.className("needs-validation"));
@@ -65,12 +64,7 @@ public class CheckoutFormSteps {
         WebElement emailInputtxtErrorMessage = seleniumConfig.getDriver().findElement(By.xpath("//input[@id='email']/following-sibling::*[1]"));
         Assertions.assertTrue(emailInputtxtErrorMessage.isDisplayed());
     }
-    @When("user clicks the continue to checkout-button with wrong information")
-    public void userClicksTheContinueToCheckoutButtonWithWrongInformation() {
 
-
-
-    }
     @Then("the user is still on checkout page")
     public void theUserIsStillOnCheckoutPage() {
         String expectedUrl = "https://webshop-agil-testautomatiserare.netlify.app/checkout";
@@ -81,7 +75,7 @@ public class CheckoutFormSteps {
     @When("the user fill out the form with {string} as payment method")
     public void theUserFillOutTheFormWithAsPaymentMethod(String payMethod) {
         Map<String, String> validCustomerData = validCustomer();
-        for (Map.Entry<String, String> set : validCustomerData.entrySet()){
+        for (Map.Entry<String, String> set : validCustomerData.entrySet()) {
             WebElement formElement = seleniumConfig.getDriver().findElement(By.id(set.getKey()));
             new Actions(seleniumConfig.getDriver())
                     .sendKeys(formElement, set.getValue())
@@ -93,7 +87,7 @@ public class CheckoutFormSteps {
         radioButtonPayment.click();
     }
 
-    public Map<String, String> validCustomer(){
+    public Map<String, String> validCustomer() {
         Map<String, String> validCustomerMap = new HashMap<>();
         validCustomerMap.put("firstName", "Ada");
         validCustomerMap.put("lastName", "Svensen");
@@ -109,7 +103,7 @@ public class CheckoutFormSteps {
         return validCustomerMap;
     }
 
-    public Map<String, String> invalidCustomer(){
+    public Map<String, String> invalidCustomer() {
         Map<String, String> validCustomerMap = new HashMap<>();
         validCustomerMap.put("firstName", "Ada");
         validCustomerMap.put("lastName", "Svensen");
@@ -124,18 +118,6 @@ public class CheckoutFormSteps {
         validCustomerMap.put("cc-cvv", "123");
         return validCustomerMap;
     }
-    @When("clicks on the continue button")
-    public void clicks_on_the_continue_button() {
-        // Write code here that turns the phrase above into concrete actions
-        //throw new io.cucumber.java.PendingException();
-    }
-
-    @Then("the user should be redirected to https:\\/\\/webshop-agil-testautomatiserare.netlify.app\\/checkout?paymentMethod=on")
-    public void the_user_should_be_redirected_to_https_webshop_agil_testautomatiserare_netlify_app_checkout_payment_method_on() {
-        // Write code here that turns the phrase above into concrete actions
-        //throw new io.cucumber.java.PendingException();
-    }
-
 
     @Then("the user should be redirected")
     public void theUserShouldBeRedirected() {
