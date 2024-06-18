@@ -78,6 +78,9 @@ jobs:
           -Dcucumber.options="--plugin html:target/cucumber-reports.html --plugin json:target/cucumber-reports.json"
           echo "Cucumber tests completed."
 
+      - name: List target directory
+        run: ls -R target
+
       - name: Upload Cucumber HTML Report
         uses: actions/upload-artifact@v3
         with:
