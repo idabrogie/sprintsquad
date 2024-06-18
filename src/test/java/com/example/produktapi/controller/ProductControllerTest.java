@@ -21,10 +21,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,16 +47,19 @@ class ProductControllerTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(productController)
                 .build();
     }
+
     @Test
     void hello() throws Exception {
         mockMvc.perform(get("/my-endpoint"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello, world!"));
     }
+
     @Test
     void testGetProductById_Exists() throws Exception {
         Integer productId = 1;
-        Product mockProduct = createMockProduct(productId);
+
+        Product mockProduct = createMockProduct(productId, "Testprodukt");
 
         when(productService.getProductById(productId)).thenReturn(mockProduct);
 
@@ -69,10 +73,11 @@ class ProductControllerTest {
 
         assertEquals(1, mockProduct.getId());
     }
+
     @Test
     void testGetProductById_NotExists() throws Exception {
         Integer productId = 2;
-        Product mockProduct = createMockProduct(productId);
+        Product mockProduct = createMockProduct(productId, "");
 
         when(productService.getProductById(productId)).thenReturn(mockProduct);
 
@@ -86,10 +91,11 @@ class ProductControllerTest {
 
         Assertions.assertNotEquals(1, mockProduct.getId());
     }
+
     @Test
     void testGetExpectedJson() {
         Integer productId = 2;
-        Product mockProduct = createMockProduct(productId);
+        Product mockProduct = createMockProduct(productId, "");
 
         when(productService.getProductById(productId)).thenReturn(mockProduct);
 
@@ -120,10 +126,10 @@ class ProductControllerTest {
         assertEquals(mockList, result);
     }
 
-    private Product createMockProduct(Integer productId) {
+    private Product createMockProduct(Integer productId, String productTitle) {
         Product product = new Product();
         product.setId(productId);
-        product.setTitle("Test Product");
+        product.setTitle(productTitle);
         product.setPrice(100.0);
         product.setCategory("Test Category");
         product.setDescription("Test Description");
