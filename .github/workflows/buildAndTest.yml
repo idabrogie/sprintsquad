@@ -74,7 +74,7 @@ jobs:
           export RUN_HEADLESS=true
           mvn -B verify \
           -Dcucumber.features=src/test/java/com/example/produktapi/features \
-          -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver \
+          -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
           echo "Cucumber tests completed."
 
       - name: List target directory
