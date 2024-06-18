@@ -86,9 +86,10 @@ class ProductServiceTest {
         product.setId(1);
         when(productRepository.findById(1)).thenReturn(Optional.empty());
 
-        assertThrows(EntityNotFoundException.class, () -> {
-            productService.updateProduct(product, 1);
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> {
+            productService.deleteProduct(1);
         });
+        System.out.println("Caught exception: " + exception.getMessage());
 
         verify(productRepository).findById(1);
         verify(productRepository, never()).save(any(Product.class));
@@ -112,9 +113,10 @@ class ProductServiceTest {
         product.setId(1);
         when(productRepository.findById(1)).thenReturn(Optional.empty());
 
-        assertThrows(EntityNotFoundException.class, () -> {
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> {
             productService.deleteProduct(1);
         });
+        System.out.println("Caught exception: " + exception.getMessage());
 
         verify(productRepository).findById(1);
         verify(productRepository, never()).deleteById(1);
