@@ -37,8 +37,11 @@ jobs:
           java-version: 22
           distribution: adopt
 
-      - name: Run Unit Tests
-        run: mvn -B test -Dtest=*UnitTest
+      - name: Run Unit Tests - ProductControllerTest
+        run: mvn -B test -Dtest=com.example.produktapi.controller.ProductControllerTest
+
+      - name: Run Unit Tests - ProductServiceTest
+        run: mvn -B test -Dtest=com.example.produktapi.service.ProductServiceTest
 
   cucumber-tests:
     runs-on: ubuntu-latest
