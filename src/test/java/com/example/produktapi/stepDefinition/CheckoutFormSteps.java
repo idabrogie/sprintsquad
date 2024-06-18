@@ -1,6 +1,7 @@
 package com.example.produktapi.stepDefinition;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
@@ -20,27 +21,37 @@ public class CheckoutFormSteps {
 
     SeleniumConfig seleniumConfig = new SeleniumConfig();
 
-    @And("there are items in the shopCart")
-    public void thereAreItemsInTheShopCart() {
-        seleniumConfig.getDriver().get("https://webshop-agil-testautomatiserare.netlify.app/products");
-
-        WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(10));
-        WebElement addToCartButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), 'Add to cart')]")));
-
-        // Scroll into view
-        ((JavascriptExecutor) seleniumConfig.getDriver()).executeScript("arguments[0].scrollIntoView(true);", addToCartButton);
-
-        // Click using JavaScript executor
-        ((JavascriptExecutor) seleniumConfig.getDriver()).executeScript("arguments[0].click();", addToCartButton);
+    @Given("User is on checkout page")
+    public void userIsOnCheckoutPage() {
+        seleniumConfig.getDriver().get("https://webshop-agil-testautomatiserare.netlify.app/checkout");
     }
 
-    @When("user clicks the continue to checkout-button without filling out the form")
-    public void userClicksTheContinueToCheckoutButtonWithoutFillingOutTheForm() {
+    @When("User fillout the form with invalid emailadress")
+    public void userFilloutTheFormWithInvalidEmailadress() {
+        // Map<String, String> validCustomerData = validCustomer();
+        for (Map.Entry<String, String> set : invalidCustomer().entrySet()){
+            WebElement formElement = seleniumConfig.getDriver().findElement(By.id(set.getKey()));
+            new Actions(seleniumConfig.getDriver())
+                    .sendKeys(formElement, set.getValue())
+                    .perform();
+            System.out.println(set.getKey() + " " + set.getValue());
+
+        }
+    }
+
+
+    @When("user clicks the continue to checkout")
+    public void userClicksTheContinueToCheckout() {
         WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(10));
         WebElement checkoutButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), 'Continue to checkout')]")));
-        checkoutButton.submit();
-    }
 
+        // Scroll into view
+        ((JavascriptExecutor) seleniumConfig.getDriver()).executeScript("arguments[0].scrollIntoView(true);", checkoutButton);
+
+        // Click using JavaScript executor
+        ((JavascriptExecutor) seleniumConfig.getDriver()).executeScript("arguments[0].click();", checkoutButton);
+       // checkoutButton.click();
+    }
     @Then("the user gets validation errors and cant continue")
     public void theUserCannotContinueToCheckout() {
         WebElement formElement = seleniumConfig.getDriver().findElement(By.className("needs-validation"));
@@ -49,6 +60,17 @@ public class CheckoutFormSteps {
         Assertions.assertTrue(hasValidateClass);
     }
 
+    @Then("the user gets validation errors on email and cant continue")
+    public void theUserGetsValidationErrorsOnEmailAndCantContinue() {
+        WebElement emailInputtxtErrorMessage = seleniumConfig.getDriver().findElement(By.xpath("//input[@id='email']/following-sibling::*[1]"));
+        Assertions.assertTrue(emailInputtxtErrorMessage.isDisplayed());
+    }
+    @When("user clicks the continue to checkout-button with wrong information")
+    public void userClicksTheContinueToCheckoutButtonWithWrongInformation() {
+
+
+
+    }
     @Then("the user is still on checkout page")
     public void theUserIsStillOnCheckoutPage() {
         String expectedUrl = "https://webshop-agil-testautomatiserare.netlify.app/checkout";
@@ -56,8 +78,8 @@ public class CheckoutFormSteps {
         Assertions.assertEquals(expectedUrl, actualUrl);
     }
 
-    @When("the user fill out the form")
-    public void theUserFillOutTheForm() {
+    @When("the user fill out the form with {string} as payment method")
+    public void theUserFillOutTheFormWithAsPaymentMethod(String payMethod) {
         Map<String, String> validCustomerData = validCustomer();
         for (Map.Entry<String, String> set : validCustomerData.entrySet()){
             WebElement formElement = seleniumConfig.getDriver().findElement(By.id(set.getKey()));
@@ -85,6 +107,21 @@ public class CheckoutFormSteps {
         return validCustomerMap;
     }
 
+    public Map<String, String> invalidCustomer(){
+        Map<String, String> validCustomerMap = new HashMap<>();
+        validCustomerMap.put("firstName", "Ada");
+        validCustomerMap.put("lastName", "Svensen");
+        validCustomerMap.put("email", "ada.svensen");
+        validCustomerMap.put("address", "Bogatan 1");
+        validCustomerMap.put("country", "Sverige");
+        validCustomerMap.put("city", "Köping");
+        validCustomerMap.put("zip", "48700");
+        validCustomerMap.put("cc-name", "Ada Svensen");
+        validCustomerMap.put("cc-number", "12356");
+        validCustomerMap.put("cc-expiration", "24/03");
+        validCustomerMap.put("cc-cvv", "123");
+        return validCustomerMap;
+    }
     @When("clicks on the continue button")
     public void clicks_on_the_continue_button() {
         // Write code here that turns the phrase above into concrete actions
@@ -96,5 +133,8 @@ public class CheckoutFormSteps {
         // Write code here that turns the phrase above into concrete actions
         //throw new io.cucumber.java.PendingException();
     }
+
+
+
 }
 
