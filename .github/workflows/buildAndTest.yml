@@ -68,9 +68,6 @@ jobs:
       - name: Install dependencies
         run: mvn install
 
-      - name: Verify the structure before running tests
-        run: ls -R
-
       - name: Run Cucumber Tests
         run: |
           echo "Running Cucumber tests headlessly..."
@@ -78,20 +75,7 @@ jobs:
           mvn -B verify \
           -Dcucumber.features=src/test/java/com/example/produktapi/features \
           -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver \
-          -Dcucumber.options="--plugin html:example/cucumber-reports.html --plugin json:example/cucumber-reports.json"
           echo "Cucumber tests completed."
 
       - name: List target directory
         run: ls -R target
-
-      - name: Upload Cucumber HTML Report
-        uses: actions/upload-artifact@v3
-        with:
-            name: cucumber-html-report
-            path: example/cucumber-reports.html
-
-      - name: Upload Cucumber JSON Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: cucumber-json-report
-          path: example/cucumber-reports.json
