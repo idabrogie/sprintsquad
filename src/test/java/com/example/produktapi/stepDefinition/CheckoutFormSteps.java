@@ -1,3 +1,8 @@
+/*
+Pär Hinds
+Ida Brogie
+Fathima Grahn
+ */
 package com.example.produktapi.stepDefinition;
 
 import io.cucumber.java.en.Given;
