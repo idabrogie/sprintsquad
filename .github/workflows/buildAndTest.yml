@@ -78,7 +78,7 @@ jobs:
           mvn -B verify \
           -Dcucumber.features=src/test/java/com/example/produktapi/features \
           -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver \
-          -Dcucumber.options="--plugin html:target/cucumber-reports.html --plugin json:target/cucumber-reports.json"
+          -Dcucumber.options="--plugin html:example/cucumber-reports.html --plugin json:example/cucumber-reports.json"
           echo "Cucumber tests completed."
 
       - name: List target directory
@@ -88,10 +88,10 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
             name: cucumber-html-report
-            path: target/cucumber-reports.html
+            path: example/cucumber-reports.html
 
       - name: Upload Cucumber JSON Report
         uses: actions/upload-artifact@v3
         with:
           name: cucumber-json-report
-          path: target/cucumber-reports.json
+          path: example/cucumber-reports.json
