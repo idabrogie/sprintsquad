@@ -89,6 +89,8 @@ public class CheckoutFormSteps {
             System.out.println(set.getKey() + " " + set.getValue());
 
         }
+        WebElement radioButtonPayment = seleniumConfig.getDriver().findElement(By.id(payMethod));
+        radioButtonPayment.click();
     }
 
     public Map<String, String> validCustomer(){
@@ -135,6 +137,28 @@ public class CheckoutFormSteps {
     }
 
 
+    @Then("the user should be redirected")
+    public void theUserShouldBeRedirected() {
 
+        String expectedURL = "https://webshop-agil-testautomatiserare.netlify.app/checkout?paymentMethod=on";
+        String actualURL = seleniumConfig.getDriver().getCurrentUrl();
+        Assertions.assertEquals(expectedURL, actualURL);
+    }
+
+    @When("User change payment method to PayPal")
+    public void userChangePaymentMethodToPayPal() {
+        WebElement radioButtonPayment = seleniumConfig.getDriver().findElement(By.id("paypal"));
+        radioButtonPayment.click();
+    }
+
+    @Then("creditcard information should be hidden and paypal information is visible")
+    public void creditcardInformationShouldBeHiddenAndPaypalInformationIsVisible() {
+        WebElement cardElement = seleniumConfig.getDriver().findElement(By.id("card"));
+        WebElement paypalInfo = seleniumConfig.getDriver().findElement(By.id("paypalInfo"));
+        Assertions.assertAll(
+                () -> Assertions.assertFalse(cardElement.isDisplayed()),
+                () -> Assertions.assertTrue(paypalInfo.isDisplayed())
+        );
+    }
 }
 

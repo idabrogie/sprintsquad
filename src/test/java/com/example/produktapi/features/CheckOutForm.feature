@@ -12,12 +12,11 @@ Feature: User wants to checkout shopcart
     And user clicks the continue to checkout
     Then the user gets validation errors on email and cant continue
 
-  #cenario: when user fills out the form correct with depit card
-  #  When the user fill out the form with "Debit card" as payment method
-    #And clicks on the continue button
-    #Then the user should be redirected to https://webshop-agil-testautomatiserare.netlify.app/checkout?paymentMethod=on
+  Scenario: when user fills out the form correct with depit card
+    When the user fill out the form with "debit" as payment method
+    And user clicks the continue to checkout
+    Then the user should be redirected
 
-  #Scenario: when user fills out the form correct with paypal
-  #  When the user fill out the form with "PayPal" as payment method
-    #And clicks on the continue button
-    #Then the user should be redirected to https://webshop-agil-testautomatiserare.netlify.app/checkout?paymentMethod=on
+  Scenario: when user fills out the form correct with paypal
+    When User change payment method to PayPal
+    Then creditcard information should be hidden and paypal information is visible
