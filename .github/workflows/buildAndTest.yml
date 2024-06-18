@@ -65,6 +65,9 @@ jobs:
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin
 
+      - name: Install dependencies
+        run: mvn install
+
       - name: Run Cucumber Tests
         run: |
           echo "Running Cucumber tests headlessly..."
