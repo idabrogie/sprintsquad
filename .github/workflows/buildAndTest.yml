@@ -71,5 +71,18 @@ jobs:
           export RUN_HEADLESS=true
           mvn -B verify \
           -Dcucumber.features=src/test/java/com/example/produktapi/features \
-          -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
+          -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver \
+          -Dcucumber.options="--plugin html:target/cucumber-reports.html --plugin json:target/cucumber-reports.json"
           echo "Cucumber tests completed."
+
+      - name: Upload Cucumber HTML Report
+        uses: actions/upload-artifact@v3
+        with:
+            name: cucumber-html-report
+            path: target/cucumber-reports.html
+
+      - name: Upload Cucumber JSON Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-json-report
+          path: target/cucumber-reports.json
