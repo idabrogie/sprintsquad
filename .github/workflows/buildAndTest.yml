@@ -77,22 +77,21 @@ jobs:
           export RUN_HEADLESS=true
           mvn -B verify \
           -Dcucumber.features=src/test/java/com/example/produktapi/features \
-          -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
+          -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver \
+          npx cucumber-js --format json:target/cucumber-reports.json --format html:target/cucumber-reports.html
           echo "Cucumber tests completed."
 
       - name: List target directory
         run: ls -lah target
 
-
-
-      - name: Generate Cucumber report
-        run: |
-          echo "Preparing Cucumber report for deployment..."
-          mvn verify -Dcucumber.options="--plugin html:target/cucumber-reports.html"
-         
-
-      - name: Deploy report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Cucumber JSON Report
+        uses: actions/upload-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./target
+          name: cucumber-json-report
+          path: reports/cucumber.json
+
+      - name: Upload Cucumber HTML Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: cucumber-html-report
+          path: reports/cucumber.html
