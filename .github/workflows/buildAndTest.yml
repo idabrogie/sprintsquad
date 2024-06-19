@@ -83,12 +83,14 @@ jobs:
       - name: List target directory
         run: ls -R target
 
-      - name: Upload Cucumber report and deploy to GitHub Pages
+      - name: Upload Cucumber report
         run: |
           echo "Preparing Cucumber report for deployment..."
           mkdir -p cucumber-reports
           mv target/cucumber-report.html target/index.html
           cp target/index.html cucumber-reports/
+          
+      - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
