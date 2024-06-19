@@ -1,0 +1,8 @@
+/home/runner/work/sprintsquad/sprintsquad/src/main/java/com/example/produktapi/service/ExceptionHandlerAdvice.java
+/home/runner/work/sprintsquad/sprintsquad/src/main/java/com/example/produktapi/model/Product.java
+/home/runner/work/sprintsquad/sprintsquad/src/main/java/com/example/produktapi/controller/ProductController.java
+/home/runner/work/sprintsquad/sprintsquad/src/main/java/com/example/produktapi/repository/ProductRepository.java
+/home/runner/work/sprintsquad/sprintsquad/src/main/java/com/example/produktapi/exception/BadRequestException.java
+/home/runner/work/sprintsquad/sprintsquad/src/main/java/com/example/produktapi/exception/EntityNotFoundException.java
+/home/runner/work/sprintsquad/sprintsquad/src/main/java/com/example/produktapi/ProduktapiApplication.java
+/home/runner/work/sprintsquad/sprintsquad/src/main/java/com/example/produktapi/service/ProductService.java

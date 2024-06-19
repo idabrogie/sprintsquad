@@ -1,0 +1,9 @@
+/home/runner/work/sprintsquad/sprintsquad/src/test/java/com/example/produktapi/stepDefinition/AddProductSteps.java
+/home/runner/work/sprintsquad/sprintsquad/src/test/java/com/example/produktapi/stepDefinition/CheckoutCorrectSum.java
+/home/runner/work/sprintsquad/sprintsquad/src/test/java/com/example/produktapi/stepDefinition/SearchForProductStep.java
+/home/runner/work/sprintsquad/sprintsquad/src/test/java/com/example/produktapi/stepDefinition/CheckoutFormSteps.java
+/home/runner/work/sprintsquad/sprintsquad/src/test/java/com/example/produktapi/controller/ProductControllerTest.java
+/home/runner/work/sprintsquad/sprintsquad/src/test/java/com/example/produktapi/stepDefinition/SeleniumConfig.java
+/home/runner/work/sprintsquad/sprintsquad/src/test/java/RunCucumberTest.java
+/home/runner/work/sprintsquad/sprintsquad/src/test/java/com/example/produktapi/service/ProductServiceTest.java
+/home/runner/work/sprintsquad/sprintsquad/src/test/java/com/example/produktapi/stepDefinition/CheckHomePageTitleSteps.java
