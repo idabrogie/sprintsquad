@@ -84,7 +84,7 @@ jobs:
         run: mvn verify -Dcucumber.options="--plugin html:target/cucumber-reports.html --plugin json:target/cucumber-reports.json"
 
       - name: List target directory
-        run: ls -l target
+        run: ls -t target
 
       - name: Archive Test Results
         uses: actions/upload-artifact@v2
