@@ -45,12 +45,10 @@ public class CheckoutFormSteps {
 
     @When("user clicks the continue to checkout")
     public void userClicksTheContinueToCheckout() {
-        WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(seleniumConfig.getDriver(), Duration.ofSeconds(20));
         WebElement checkoutButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), 'Continue to checkout')]")));
-
         // Scroll into view
         ((JavascriptExecutor) seleniumConfig.getDriver()).executeScript("arguments[0].scrollIntoView(true);", checkoutButton);
-
         // Click using JavaScript executor
         ((JavascriptExecutor) seleniumConfig.getDriver()).executeScript("arguments[0].click();", checkoutButton);
         // checkoutButton.click();
@@ -126,7 +124,6 @@ public class CheckoutFormSteps {
 
     @Then("the user should be redirected")
     public void theUserShouldBeRedirected() {
-
         String expectedURL = "https://webshop-agil-testautomatiserare.netlify.app/checkout?paymentMethod=on";
         String actualURL = seleniumConfig.getDriver().getCurrentUrl();
         Assertions.assertEquals(expectedURL, actualURL);

@@ -6,6 +6,9 @@ on:
       - main
       - feature/*
 
+  permissions:
+    contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -47,9 +50,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
 
-    permissions:
-      contents: write
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -83,14 +83,16 @@ jobs:
       - name: List target directory
         run: ls -lah target
 
-      - name: Upload Cucumber report
+
+
+      - name: Generate Cucumber report
         run: |
           echo "Preparing Cucumber report for deployment..."
-          mkdir -p cucumber-reports
-          echo "<h1>Cucbumber test</h1>" > cucumber-reports/index.html
+          mvn verify -Dcucumber.options="--plugin html:target/cucumber-reports.html"
+         
 
       - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./cucumber-reports
+          publish_dir: ./target
