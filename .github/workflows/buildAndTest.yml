@@ -80,11 +80,11 @@ jobs:
           -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
           echo "Cucumber tests completed."
 
-      - name: List target directory
-        run: ls -lah target
-
       - name: Generate Cucumber Reports
         run: mvn verify -Dcucumber.options="--plugin html:target/cucumber-reports.html --plugin json:target/cucumber-reports.json"
+
+      - name: List target directory
+        run: ls -l target
 
       - name: Archive Test Results
         uses: actions/upload-artifact@v2
