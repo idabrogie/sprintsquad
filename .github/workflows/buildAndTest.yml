@@ -78,7 +78,8 @@ jobs:
         run: |
           echo "Running Cucumber tests headlessly..."
           export RUN_HEADLESS=true
-          mvn test
+          mvn -B verify \
+          -Dcucumber.features=src/test/java/com/example/produktapi/features 
           echo "Cucumber tests completed."
 
       - name: List target directory
