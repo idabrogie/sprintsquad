@@ -15,7 +15,7 @@ Feature: User wants to checkout shopcart
   Scenario: when user fills out the form correct with depit card
     When the user fill out the form with "debit" as payment method
     And user clicks the continue to checkout
-    #Then the user should be redirected
+    Then the user should be redirected
 
   Scenario: when user fills out the form correct with paypal
     When User change payment method to PayPal
