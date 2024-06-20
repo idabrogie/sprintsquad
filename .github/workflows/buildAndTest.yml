@@ -37,6 +37,9 @@ jobs:
           java-version: 22
           distribution: adopt
 
+      - name: Create Test File
+        run: echo "This is a test file." > testfile.txt
+
       - name: Run Unit Tests - ProductControllerTest
         run: mvn -B test -Dtest=com.example.produktapi.controller.ProductControllerTest
 
@@ -70,6 +73,11 @@ jobs:
 
       - name: Install dependencies
         run: mvn install
+
+      - name: Create Directory and File for Testing
+        run: |
+            mkdir -p target/cucumber-reports
+            echo "Cucumber report test content" > target/cucumber-reports/cucumber-reports.html  
 
       - name: Run Cucumber Tests
         run: |
