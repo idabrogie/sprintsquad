@@ -38,6 +38,7 @@ jobs:
         with:
           java-version: 22
           distribution: adopt
+          node-version: '20'
 
       - name: Create Test File
         run: echo "This is a test file." > testfile.txt
