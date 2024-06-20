@@ -82,6 +82,10 @@ jobs:
           -Dcucumber.features=src/test/java/com/example/produktapi/features 
           echo "Cucumber tests completed."
 
+      - name: Generate Cucumber Reports
+        run: mvn test -Dcucumber.options="--plugin html:target/cucumber-reports.html --plugin json:target/cucumber-reports.json"
+
+
       - name: List target directory
         run: ls -R target
 
