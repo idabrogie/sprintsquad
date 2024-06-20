@@ -38,6 +38,12 @@ public class SeleniumConfig {
     public void user_clicks_on_menu_item_shop() {
         getDriver().get("https://webshop-agil-testautomatiserare.netlify.app/products#");
     }
+
+    @Given("user clicks on Menu item shop initially")
+    public void user_clicks_on_menu_item_shop_initially() {
+        getDriver().get("https://webshop-agil-testautomatiserare.netlify.app/products");
+    }
+
     @When("User clicks on Meny item {string}")
     public void userClicksOnMenyItem(String menyItem) {
         getDriver().findElement(By.linkText(menyItem)).click();
@@ -80,8 +86,9 @@ public class SeleniumConfig {
     public void tearDown() {
         if (getDriver() != null) {
             System.out.println("Quitting the driver...");
-            getDriver().quit();
-            driver = null; // Reset the driver
+        }
+           getDriver().quit();
+           driver = null; // Reset the driver
         }
     }
-}
+
