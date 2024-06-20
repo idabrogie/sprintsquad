@@ -90,5 +90,5 @@ jobs:
         with:
           name: cucumber-reports
           path: |
-            target/cucumber-reports/cucumber-reports.html
-            target/cucumber-reports/cucumber-reports.json
+            target/cucumber-reports.html
+            target/cucumber-reports.json
