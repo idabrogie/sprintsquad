@@ -19,9 +19,10 @@ public class AllProductsButtonSteps {
 
     @Then("user should be redirected to shop page")
     public void user_should_be_redirected_to_shop_page() {
-        String expectedPage = seleniumConfig.getDriver().getCurrentUrl();
-        String actualPage = "https://webshop-agil-testautomatiserare.netlify.app/products.html";
+        String actualPage = seleniumConfig.getDriver().getCurrentUrl();
+        String expectedPage = "https://webshop-agil-testautomatiserare.netlify.app/products.html";
         Assertions.assertEquals(expectedPage, actualPage);
     }
+
 
 }
