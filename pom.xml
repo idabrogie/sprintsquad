@@ -102,9 +102,6 @@
 						<include>**/service/*Test.java</include>
 					</includes>
 					<testFailureIgnore>false</testFailureIgnore>
-					<systemPropertyVariables>
-						<cucumber.options>--plugin html:target/cucumber-reports.html --plugin json:target/cucumber-reports.json</cucumber.options>
-					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 		</plugins>

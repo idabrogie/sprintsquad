@@ -77,19 +77,17 @@ jobs:
           export RUN_HEADLESS=true
           mvn -B verify \
           -Dcucumber.features=src/test/java/com/example/produktapi/features \
+          -Dcucumber.options="--plugin html:target/cucumber-reports/cucumber-reports.html --plugin json:target/cucumber-reports/cucumber-reports.json" \
           -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
           echo "Cucumber tests completed."
 
-      - name: Generate Cucumber Reports
-        run: mvn verify -Dcucumber.options="--plugin html:target/cucumber-reports.html --plugin json:target/cucumber-reports.json"
-
       - name: List target directory
-        run: ls -t target
+        run: ls -R target
 
       - name: Archive Test Results
         uses: actions/upload-artifact@v2
         with:
           name: cucumber-reports
           path: |
-            target/cucumber-reports.html
-            target/cucumber-reports.json
+            target/cucumber-reports/cucumber-reports.html
+            target/cucumber-reports/cucumber-reports.json
