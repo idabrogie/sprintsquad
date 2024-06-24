@@ -19,7 +19,7 @@ jobs:
         run: npm install -g @usebruno/cli
 
       - name: Verify Bruno Installation
-        run: bruno --version
+        run: bru --version
 
       - name: Run Bruno Tests
-        run: bruno run .bruno
+        run: bru run .bruno
