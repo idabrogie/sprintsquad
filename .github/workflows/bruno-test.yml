@@ -16,7 +16,7 @@ jobs:
           node-version: '14'
 
       - name: Install Bruno CLI
-        run: npm install -g @usebruno/bruno-cli
+        run: npm install -g @usebruno/cli
 
       - name: Verify Bruno Installation
         run: bruno --version
