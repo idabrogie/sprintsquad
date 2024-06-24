@@ -1,0 +1,16 @@
+meta {
+  name: Hello Endpoint
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://produktapi-6ef53ba8f2f2.herokuapp.com/my-endpoint
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body: eq Hello, world!
+}

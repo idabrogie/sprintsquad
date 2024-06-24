@@ -1,0 +1,16 @@
+meta {
+  name: Get All Categories
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://produktapi-6ef53ba8f2f2.herokuapp.com/products/categories
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body: length 4
+}
