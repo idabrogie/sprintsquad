@@ -1,0 +1,15 @@
+meta {
+  name: Get All Products
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://produktapi-6ef53ba8f2f2.herokuapp.com/products
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+}

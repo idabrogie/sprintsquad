@@ -1,0 +1,15 @@
+meta {
+  name: Test Not Found Exception
+  type: http
+  seq: 7
+}
+
+get {
+  url: https://produktapi-6ef53ba8f2f2.herokuapp.com/products/242
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 404
+}

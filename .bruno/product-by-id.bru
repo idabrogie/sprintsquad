@@ -1,0 +1,16 @@
+meta {
+  name: Get Product by ID
+  type: http
+  seq: 6
+}
+
+get {
+  url: https://produktapi-6ef53ba8f2f2.herokuapp.com/products/2
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+  res.body.id: eq 2
+}
