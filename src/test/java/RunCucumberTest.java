@@ -1,3 +1,4 @@
+//Ida, Pär, Geetha, Fatima
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -11,10 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
         glue = "com.example.produktapi.stepDefinition",
         plugin = {
                 "pretty",
-                "html:target/cucumber-reports.html",
-                "json:target/cucumber-reports.json"
-        },
-        monochrome = true
+                "html:target/cucumber-reports.html"
+        }
 )
 public class RunCucumberTest {
 }
