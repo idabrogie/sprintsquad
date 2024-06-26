@@ -1,3 +1,4 @@
+# Pär, Fatima, Ida
 Feature: Check for correct sum
 
   Background:
