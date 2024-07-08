@@ -1,4 +1,4 @@
-package com.example.produktapi.stepDefinition;
+package com.example.produktapi.cucumber;
 import io.cucumber.java.en.Then;
 
 import io.cucumber.java.en.When;

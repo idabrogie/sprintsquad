@@ -3,7 +3,7 @@ Pär Hinds
 Ida Brogie
 Fathima Grahn
  */
-package com.example.produktapi.stepDefinition;
+package com.example.produktapi.cucumber;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
