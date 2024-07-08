@@ -1,3 +1,4 @@
+# Geetha, Ida, Pär, Fatima
 Feature: Filter products by category
 
   Scenario Outline: Filter products by category
