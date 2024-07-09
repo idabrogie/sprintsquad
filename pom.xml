@@ -14,7 +14,7 @@
 	<name>Produktapi</name>
 	<description>Produktapi för testning</description>
 	<properties>
-		<java.version>22</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -98,11 +98,14 @@
 				<version>3.2.5</version>
 				<configuration>
 					<includes>
-						<include>**/RunCucumberTest.java</include>
-						<include>**/controller/*Test.java</include>
-						<include>**/service/*Test.java</include>
+						<include>**/*Test.java</include>
 					</includes>
-					<testFailureIgnore>false</testFailureIgnore>
+					<properties>
+						<property>
+							<name>junit.jupiter.extensions.autodetection.enabled</name>
+							<value>true</value>
+						</property>
+					</properties>
 				</configuration>
 			</plugin>
 		</plugins>
